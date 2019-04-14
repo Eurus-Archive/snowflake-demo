@@ -11,7 +11,7 @@ def synchronized(wrapped):
 
     @functools.wraps(wrapped)
     def _wrap(*args, **kwargs):
-        print("Calling '%s' with Lock %s" % (wrapped.__name__, id(lock)))
+        # print("Calling '%s' with Lock %s" % (wrapped.__name__, id(lock)))
         with lock:
             return wrapped(*args, **kwargs)
 
@@ -71,5 +71,8 @@ class IdWorker:
 
 if __name__ == '__main__':
     worker = IdWorker(1, 1, 0)
-    print(worker.get_id())
     # todo my_thread
+    s = time.time()
+    for i in range(10000000):
+        worker.get_id()
+    print(time.time() - s)
