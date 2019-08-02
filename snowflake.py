@@ -4,6 +4,7 @@ Generate distributed-id implementation Twitter id's Snowflake with Python
 import functools
 import threading
 import time
+import uuid
 
 
 def synchronized(wrapped):
@@ -71,8 +72,14 @@ class IdWorker:
 
 if __name__ == '__main__':
     worker = IdWorker(1, 1, 0)
-    # todo my_thread
+    print("Snowflake generate numbers of 1000000 ids ")
     s = time.time()
-    for i in range(10000000):
+    for i in range(1000000):
         worker.get_id()
-    print(time.time() - s)
+    print("time spend {}".format(time.time() - s))
+
+    print("UUID generate numbers of 1000000 ids")
+    s = time.time()
+    for i in range(1000000):
+        uuid.uuid4()
+    print("time spend {}".format(time.time() - s))
